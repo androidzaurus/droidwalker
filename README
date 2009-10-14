@@ -1,0 +1,41 @@
+diff-araneo-android-2.6.28.patch
+--------------------------------
+A patch for Android support.
+
+1) Grab NetWalker source code and unzip.
+http://netbook-remix.archive.canonical.com/updates/pool/public/l/linux-fsl-imx51/
+Current patch is targeted for linux-fsl-imx51_2.6.28-15.50fsl1araneo7.tar.gz
+
+2) Patch
+$ cd jaunty-arm
+$ patch -p1 < ../diff-araneo-android-2.6.28.patch
+
+3) Configure and build
+$ export ARCH=arm
+$ export PATH=/path/to/your/cross/toolchain:$PATH
+$ export CROSS_COMPILE=arm-your-linux-gnueabi-
+$ make netwalker-android_defconfig
+$ make zImage
+
+netwalker-donut-tls.patch
+-------------------------
+A patch for Cortex-A8 TLS reg issue.
+
+1) repo sync donut source tree
+
+2) Patch
+$ cd donut
+$ patch -p1 < ../netwalker-donut-tls.patch
+
+3) Build
+$ make
+
+Known issues
+------------
+* very unstable
+* no networking
+* display tearing
+* rotate to portlait mode
+* no key customization - no menu key, no end key
+
+

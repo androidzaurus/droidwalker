@@ -1,0 +1,25 @@
+diff -urpN donut/bionic/libc/private/bionic_tls.h donutwalker/bionic/libc/private/bionic_tls.h
+--- donut/bionic/libc/private/bionic_tls.h	2009-10-14 17:04:17.000000000 +0900
++++ donutwalker/bionic/libc/private/bionic_tls.h	2009-10-14 17:04:28.000000000 +0900
+@@ -88,7 +88,8 @@ extern int __set_tls(void *ptr);
+ 
+ /* get the TLS */
+ #ifdef __arm__
+-#  define __get_tls() ( *((volatile void **) 0xffff0ff0) )
++typedef void* (__get_tls_t)(void);
++static const __get_tls_t* __get_tls = (const __get_tls_t *)0xffff0fe0;
+ #else
+ extern void*  __get_tls( void );
+ #endif
+diff -urpN donut/frameworks/base/opengl/libs/GLES_CM/gl.cpp donutwalker/frameworks/base/opengl/libs/GLES_CM/gl.cpp
+--- donut/frameworks/base/opengl/libs/GLES_CM/gl.cpp	2009-10-14 17:06:48.000000000 +0900
++++ donutwalker/frameworks/base/opengl/libs/GLES_CM/gl.cpp	2009-10-14 17:06:58.000000000 +0900
+@@ -73,7 +73,7 @@ void glVertexPointerBounds(GLint size, G
+ #undef CALL_GL_API
+ #undef CALL_GL_API_RETURN
+ 
+-#if USE_FAST_TLS_KEY
++#if 0 // USE_FAST_TLS_KEY
+ 
+     #define API_ENTRY(_api) __attribute__((naked)) _api
+ 
