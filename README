@@ -1,4 +1,6 @@
 diff-araneo-android-2.6.28.patch
+disable_double_buffering.patch
+fbmem_8m.patch
 --------------------------------
 A patch for Android support.
 
@@ -9,6 +11,8 @@ Current patch is targeted for linux-fsl-imx51_2.6.28-15.50fsl1araneo7.tar.gz
 2) Patch
 $ cd jaunty-arm
 $ patch -p1 < ../diff-araneo-android-2.6.28.patch
+$ patch -p1 < ../disable_double_buffering.patch
+$ patch -p1 < ../fbmem_8m.patch
 
 3) Configure and build
 $ export ARCH=arm
@@ -30,11 +34,13 @@ $ patch -p1 < ../netwalker-donut-tls.patch
 3) Build
 $ make
 
+memo of disable_double_buffering.patch
+-------------------------------------
+* disable double buffering
+* show cursor on console
+
 Known issues
 ------------
-* very unstable
-* no networking
-* display tearing
 * rotate to portlait mode
 * no key customization - no menu key, no end key
 
