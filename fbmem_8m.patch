@@ -1,0 +1,11 @@
+--- linux-2.6.28-15.50fsl1araneo7/arch/arm/mach-mx51/mx51_erdos.c	2009-09-07 22:54:48.000000000 +0900
++++ android-netwalker/arch/arm/mach-mx51/mx51_erdos.c	2009-10-20 17:19:49.000000000 +0900
+@@ -821,7 +821,7 @@ static void __init fixup_mxc_board(struc
+ 			continue;
+ 		}
+ 		if (t->u.mem.size == SZ_512M) {
+-			t->u.mem.size -= SZ_32M;
++			t->u.mem.size -= SZ_8M;
+ 		}
+ 		mxcfb_resources[0].start = t->u.mem.start + t->u.mem.size;
+ 		mxcfb_resources[0].end	 = t->u.mem.start + SZ_512M - 1;
