@@ -1,0 +1,18 @@
+--- donut/frameworks/policies/base/phone/com/android/internal/policy/impl/PhoneWindowManager.java	2009-10-14 12:00:12.000000000 +0900
++++ donutwalker/frameworks/policies/base/phone/com/android/internal/policy/impl/PhoneWindowManager.java	2009-10-16 11:46:20.000000000 +0900
+@@ -498,14 +498,7 @@ public class PhoneWindowManager implemen
+     }
+     
+     void readLidState() {
+-        try {
+-            int sw = mWindowManager.getSwitchState(0);
+-            if (sw >= 0) {
+-                mLidOpen = sw == 0;
+-            }
+-        } catch (RemoteException e) {
+-            // Ignore
+-        }
++		mLidOpen = false;
+     }
+     
+     /** {@inheritDoc} */
