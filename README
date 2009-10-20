@@ -22,6 +22,7 @@ $ make netwalker-android_defconfig
 $ make zImage
 
 netwalker-donut-tls.patch
+fix_to_landscape.patch
 -------------------------
 A patch for Cortex-A8 TLS reg issue.
 
@@ -30,6 +31,7 @@ A patch for Cortex-A8 TLS reg issue.
 2) Patch
 $ cd donut
 $ patch -p1 < ../netwalker-donut-tls.patch
+$ patch -p1 < ../fix_to_landscape.patch
 
 3) Build
 $ make
@@ -41,7 +43,6 @@ memo of disable_double_buffering.patch
 
 Known issues
 ------------
-* rotate to portlait mode
 * no key customization - no menu key, no end key
 
 
