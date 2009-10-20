@@ -41,6 +41,17 @@ memo of disable_double_buffering.patch
 * disable double buffering
 * show cursor on console
 
+memo of SHARP_USB_Keyboard.kl
+-----------------------------
+* should goes to system/usr/keylayout/
+* cd system/usr/keychars/ && cp qwerty.kcm.bin SHARP_USB_Keyboard.kcm.bin
+* assignment
+[Backspace] - [Back]
+[F1] - [MENU]
+[F5] - [DPAD_CENTER]
+[F6] - [END]
+
+
 Known issues
 ------------
 * no key customization - no menu key, no end key
