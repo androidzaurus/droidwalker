@@ -1,0 +1,84 @@
+--- linux-2.6.28-15.50fsl1araneo7/drivers/video/mxc/mxc_ipuv3_fb.c	2009-09-11 22:50:26.000000000 +0900
++++ android-netwalker/drivers/video/mxc/mxc_ipuv3_fb.c	2009-10-20 17:19:31.000000000 +0900
+@@ -127,8 +127,8 @@ static int mxcfb_set_fix(struct fb_info 
+ 	fix->type = FB_TYPE_PACKED_PIXELS;
+ 	fix->accel = FB_ACCEL_NONE;
+ 	fix->visual = FB_VISUAL_TRUECOLOR;
+-	fix->xpanstep = 1;
+-	fix->ypanstep = 1;
++	fix->xpanstep = 0;
++	fix->ypanstep = 0;
+ 
+ 	return 0;
+ }
+@@ -138,7 +138,7 @@ static int mxcfb_set_fix(struct fb_info 
+  *
+  * @param       info     framebuffer information pointer
+  */
+-static int mxcfb_set_par(struct fb_info *fbi)
++static int mxcfb_set_par_init(struct fb_info *fbi)
+ {
+ 	int retval;
+ 	u32 mem_len;
+@@ -274,6 +274,16 @@ static int mxcfb_set_par(struct fb_info 
+ 	return 0;
+ }
+ 
++
++static int mxcfb_set_par(struct fb_info *fbi)
++{
++	static int init_set_par = 0;
++	if (init_set_par)
++		return 0;
++	init_set_par++;
++	return mxcfb_set_par_init(fbi);
++}
++
+ /*
+  * Check framebuffer variable parameters and adjust to valid values.
+  *
+@@ -289,8 +299,7 @@ static int mxcfb_check_var(struct fb_var
+ 
+ 	if (var->xres_virtual < var->xres)
+ 		var->xres_virtual = var->xres;
+-	if (var->yres_virtual < var->yres)
+-		var->yres_virtual = var->yres;
++	var->yres_virtual = var->yres;
+ 
+ 	if ((var->bits_per_pixel != 32) && (var->bits_per_pixel != 24) &&
+ 	    (var->bits_per_pixel != 16) && (var->bits_per_pixel != 8))
+@@ -610,7 +619,7 @@ static int mxcfb_blank(int blank, struct
+ 		}
+ 		break;
+ 	case FB_BLANK_UNBLANK:
+-		mxcfb_set_par(info);
++		mxcfb_set_par_init(info);
+ 		break;
+ 	}
+ 	return 0;
+@@ -752,16 +761,12 @@ static struct fb_ops mxcfb_ops = {
+ 	.fb_set_par = mxcfb_set_par,
+ 	.fb_check_var = mxcfb_check_var,
+ 	.fb_setcolreg = mxcfb_setcolreg,
+-	.fb_pan_display = mxcfb_pan_display,
+ 	.fb_ioctl = mxcfb_ioctl,
+ 	.fb_mmap = mxcfb_mmap,
+ 	.fb_fillrect = cfb_fillrect,
+ 	.fb_copyarea = cfb_copyarea,
+ 	.fb_imageblit = cfb_imageblit,
+ 	.fb_blank = mxcfb_blank,
+-#ifdef CONFIG_MACH_MX51_ERDOS
+-	.fb_cursor = dmy_cursor,
+-#endif /* CONFIG_MACH_MX51_ERDOS */
+ };
+ 
+ static irqreturn_t mxcfb_irq_handler(int irq, void *dev_id)
+@@ -996,7 +1001,7 @@ static int mxcfb_probe(struct platform_d
+ 	ipu_disable_irq(mxcfbi->ipu_ch_irq);
+ 
+ 	/* Default Y virtual size is 2x panel size */
+-	fbi->var.yres_virtual = fbi->var.yres * 2;
++	fbi->var.yres_virtual = fbi->var.yres;
+ 
+ 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
+ 	if (res) {
