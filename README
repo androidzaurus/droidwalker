@@ -1,6 +1,7 @@
 diff-araneo-android-2.6.28.patch
 disable_double_buffering.patch
 fbmem_8m.patch
+build-wifi-defconfig.patch
 --------------------------------
 A patch for Android support.
 
@@ -13,6 +14,7 @@ $ cd jaunty-arm
 $ patch -p1 < ../diff-araneo-android-2.6.28.patch
 $ patch -p1 < ../disable_double_buffering.patch
 $ patch -p1 < ../fbmem_8m.patch
+$ patch -p1 < ../build-wifi-defconfig.patch
 
 3) Configure and build
 $ export ARCH=arm
@@ -20,6 +22,7 @@ $ export PATH=/path/to/your/cross/toolchain:$PATH
 $ export CROSS_COMPILE=arm-your-linux-gnueabi-
 $ make netwalker-android_defconfig
 $ make zImage
+$ make modules
 
 netwalker-donut-tls.patch
 fix_to_landscape.patch
