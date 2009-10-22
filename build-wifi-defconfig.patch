@@ -1,0 +1,48 @@
+diff -ur -x drivers a/arch/arm/configs/netwalker_android_defconfig b/arch/arm/configs/netwalker_android_defconfig
+--- a/arch/arm/configs/netwalker_android_defconfig	2009-10-21 11:41:20.000000000 +0900
++++ b/arch/arm/configs/netwalker_android_defconfig	2009-10-22 10:47:11.000000000 +0900
+@@ -1,7 +1,7 @@
+ #
+ # Automatically generated make config: don't edit
+ # Linux kernel version: 2.6.28.10
+-# Tue Oct 13 17:07:17 2009
++# Wed Oct 21 11:50:50 2009
+ #
+ CONFIG_ARM=y
+ CONFIG_SYS_SUPPORTS_APM_EMULATION=y
+@@ -462,7 +462,17 @@
+ # CONFIG_BT is not set
+ # CONFIG_AF_RXRPC is not set
+ # CONFIG_PHONET is not set
+-# CONFIG_WIRELESS is not set
++CONFIG_WIRELESS=y
++# CONFIG_CFG80211 is not set
++CONFIG_WIRELESS_OLD_REGULATORY=y
++CONFIG_WIRELESS_EXT=y
++CONFIG_WIRELESS_EXT_SYSFS=y
++# CONFIG_MAC80211 is not set
++CONFIG_IEEE80211=y
++# CONFIG_IEEE80211_DEBUG is not set
++# CONFIG_IEEE80211_CRYPT_WEP is not set
++# CONFIG_IEEE80211_CRYPT_CCMP is not set
++# CONFIG_IEEE80211_CRYPT_TKIP is not set
+ # CONFIG_RFKILL is not set
+ # CONFIG_NET_9P is not set
+ 
+@@ -700,6 +710,7 @@
+ #
+ # CONFIG_WLAN_PRE80211 is not set
+ # CONFIG_WLAN_80211 is not set
++CONFIG_KS7010_SDIO=m
+ # CONFIG_IWLWIFI_LEDS is not set
+ 
+ #
+@@ -1166,7 +1177,7 @@
+ # CONFIG_VGA_CONSOLE is not set
+ CONFIG_DUMMY_CONSOLE=y
+ CONFIG_FRAMEBUFFER_CONSOLE=y
+-# CONFIG_FRAMEBUFFER_CONSOLE_DETECT_PRIMARY is not set
++CONFIG_FRAMEBUFFER_CONSOLE_DETECT_PRIMARY=y
+ # CONFIG_FRAMEBUFFER_CONSOLE_ROTATION is not set
+ # CONFIG_FONTS is not set
+ CONFIG_FONT_8x8=y
